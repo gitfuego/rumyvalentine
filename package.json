@@ -1,0 +1,36 @@
+{
+  "name": "rumyvalentine",
+  "version": "1.0.0",
+  "description": "matchmaking",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitfuego/rumyvalentine.git"
+  },
+  "author": "Khansa",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/gitfuego/rumyvalentine/issues"
+  },
+  "homepage": "https://github.com/gitfuego/rumyvalentine#readme",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.6",
+    "next": "^14.2.4",
+    "next-auth": "^4.24.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.9",
+    "@types/react": "18.3.3",
+    "sass": "^1.77.6",
+    "typescript": "5.5.3"
+  }
+}
