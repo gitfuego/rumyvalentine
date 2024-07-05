@@ -10,7 +10,7 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ profile }) {
-      return profile.email.endsWith("rutgers.edu")
+      return profile.email.endsWith("@scarletmail.rutgers.edu")
     }
   }
 })
