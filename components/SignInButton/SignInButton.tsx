@@ -2,6 +2,7 @@
 import React from 'react';
 import { useSession, signOut, signIn } from 'next-auth/react';
 
+
 export default function SignInButton() {
   const { data: session } = useSession();
 
@@ -9,7 +10,7 @@ export default function SignInButton() {
     return (
       <div>
         <p>{session.user.email}</p>
-        <button onClick={() => signOut()} >
+        <button onClick={() => {signOut()}} >
           Sign Out
         </button>
       </div>

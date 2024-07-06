@@ -1,15 +1,15 @@
-import AppBar from '../components/AppBar'
-import Providers from '../components/Providers'
+import AppBar from '../components/AppBar/AppBar'
+import AuthProvider from '../components/AuthProvider/AuthProvider'
 import './global.scss'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Providers>
+        <AuthProvider>
           <AppBar />
           {children}
-        </Providers>
+        </AuthProvider>
       </body>
     </html>
   )

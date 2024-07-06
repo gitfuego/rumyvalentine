@@ -1,5 +1,4 @@
-import React from "react";
-import SignInButton from "./SignInButton";
+import SignInButton from "../SignInButton/SignInButton";
 
 export default function AppBar() {
   return (
