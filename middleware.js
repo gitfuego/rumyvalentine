@@ -6,7 +6,8 @@ export async function middleware(req) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
    // Allow requests to public assets like images, CSS, etc.
-   if (pathname.startsWith('/images')) {
+   if (pathname.startsWith('/_next/static') || 
+   pathname.startsWith('/_next/image') || pathname.startsWith('/images')) {
     return NextResponse.next();
   }
 
