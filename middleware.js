@@ -5,6 +5,11 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl;
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
+   // Allow requests to public assets like images, CSS, etc.
+   if (pathname.startsWith('/images')) {
+    return NextResponse.next();
+  }
+
   // Move logged in users to homepage if they try to access the landing page
   if (token && pathname === '/') {
     const url = req.nextUrl.clone();
