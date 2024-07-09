@@ -1,7 +1,6 @@
 "use client";
 import { useSession, signOut, signIn } from 'next-auth/react';
 import styles from "./AppBar.module.scss"
-import Image from 'next/image';
 
 export default function AppBar() {
   const { data: session } = useSession();
