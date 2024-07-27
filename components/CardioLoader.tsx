@@ -2,9 +2,8 @@
 import { cardio } from "ldrs";
 
 
-cardio.register();
-
 export default function CardioLoader() {
+  cardio.register();
   return (
     <l-cardio
       size="80"

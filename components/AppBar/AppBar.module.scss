@@ -17,9 +17,15 @@
   min-width: 60px;
   min-height: 60px;
   filter: drop-shadow(2px 2px 2px rgb(175, 175, 175));
-  transition: all ease-in-out 150ms;
   &:hover {
     filter: drop-shadow(2px 2px 2px rgb(82, 82, 82));
-    transition: all ease-in-out 150ms;
   }
+}
+
+.nav {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
 }

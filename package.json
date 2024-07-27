@@ -21,7 +21,13 @@
   "homepage": "https://github.com/gitfuego/rumyvalentine#readme",
   "dependencies": {
     "@auth/pg-adapter": "^1.4.1",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/inter": "^5.0.19",
+    "@mui/joy": "^5.0.0-beta.47",
     "@reduxjs/toolkit": "^2.2.6",
+    "@supabase/ssr": "^0.4.0",
+    "@supabase/supabase-js": "^2.44.4",
     "ldrs": "^1.0.2",
     "next": "^14.2.4",
     "next-auth": "^4.24.7",
