@@ -13,6 +13,7 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
       <head>
         <title>RU my Valentine</title>
         <link rel="icon" href="/images/logoHeartOnly.svg" />
+        <script src="https://accounts.google.com/gsi/client" async></script>
       </head>
       <body>
         <CssVarsProvider>

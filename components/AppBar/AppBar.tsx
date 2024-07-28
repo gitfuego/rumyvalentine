@@ -1,10 +1,11 @@
 "use client";
 import { useSession, signOut, signIn } from 'next-auth/react';
 import styles from "./AppBar.module.scss"
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import { useColorScheme } from '@mui/joy/styles';
 import { Button } from '@mui/joy';
 import React from 'react';
 import CardioLoader from '../CardioLoader';
+import { createClient } from "../../utils/supabase/client"
 
 
 function ModeToggle() {
@@ -35,13 +36,13 @@ function ModeToggle() {
 }
 
 
+
 export default function AppBar() {
-  const { data: session } = useSession();
 
   return (
     <header className={styles.header} >
       <a href='/' className={styles.logo}></a>
-      <h4>{session?.user?.email ?? ''}</h4>
+      <h4>{''}</h4>
       <nav className={styles.nav}>
         <SignInButton />
         <ModeToggle />
@@ -51,11 +52,45 @@ export default function AppBar() {
 }
 
 function SignInButton() {
-  const { data: session } = useSession();
+  const supabase = createClient();
+
+  async function handleSignInWithGoogle(response) {
+    const { data, error } = await supabase.auth.signInWithIdToken({
+      provider: 'google',
+      token: response.credential,
+    })
+  }
+  
+
+  const handleLogin = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${location.origin}/auth/callback?next=${
+          location.origin
+        }`,
+      },
+    });
+  };
 
   return (
-    <Button onClick={() => {session && session.user ? signOut() : signIn()}} >
-      {session && session.user ? "Sign Out" : "Sign In"}
-    </Button>
+    <>
+    <div id="g_id_onload"
+     data-client_id="438319103339-laqn6ev4r7hiuf5081kthqcd3ineq7f0.apps.googleusercontent.com"
+     data-context="signin"
+     data-ux_mode="redirect"
+     data-login_uri="localhost:3000"
+     data-callback="handleSignInWithGoogle"
+     data-auto_prompt="false">
+    </div>
+    <div className="g_id_signin"
+        data-type="standard"
+        data-shape="pill"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left">
+    </div>
+    </>
   );
 }
