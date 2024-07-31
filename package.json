@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/gitfuego/rumyvalentine#readme",
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/inter": "^5.0.19",
+    "@mui/joy": "^5.0.0-beta.48",
     "@neondatabase/serverless": "^0.9.4",
     "@reduxjs/toolkit": "^2.2.6",
     "ldrs": "^1.0.2",

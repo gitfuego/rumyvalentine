@@ -37,5 +37,5 @@ export default async function Dashboard() {
   const session = await getServerSession();
   const data = await getData();
 
-  return <>{JSON.stringify(session)}</>;
+  return <>{JSON.stringify(data)}</>;
 }
