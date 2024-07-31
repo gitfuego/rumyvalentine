@@ -2,5 +2,5 @@ import Questionnaire from "../components/Questionnaire/Questionnaire";
 
 
 export default function Page() {
-  return <Questionnaire />
+  return <h1>Landing</h1>
 }

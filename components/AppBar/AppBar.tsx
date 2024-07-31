@@ -1,6 +1,7 @@
 "use client";
 import { useSession, signOut, signIn } from 'next-auth/react';
 import styles from "./AppBar.module.scss"
+import { Button } from '@mui/joy';
 
 export default function AppBar() {
   const { data: session } = useSession();
@@ -18,8 +19,8 @@ function SignInButton() {
   const { data: session } = useSession();
 
   return (
-    <button onClick={() => {session && session.user ? signOut() : signIn()}} >
+    <Button variant="outlined" color="danger" onClick={() => {session && session.user ? signOut() : signIn()}} >
       {session && session.user ? "Sign Out" : "Sign In"}
-    </button>
+    </Button>
   );
 }
