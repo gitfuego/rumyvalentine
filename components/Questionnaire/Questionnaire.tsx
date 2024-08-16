@@ -37,11 +37,10 @@ export default function Questionnaire() {
     <form
     onSubmit={(event) => {
     event.preventDefault();
-    console.log(formData)
-    alert(JSON.stringify(formData));
-    fetch('/api/postResponse', {
+    console.log(formData);
+    fetch('/api/responses', {
       method: "POST",
-      body: JSON.stringify({responses: [...formData], email: session.user.email})
+      body: JSON.stringify({responses: [...formData], email: session?.user?.email})
     })
     }}
     >
@@ -66,8 +65,8 @@ function Question({ data, setFormData, i }) {
   return (
     <FormControl>
       <FormLabel>{data.question}</FormLabel>
-      <RadioGroup defaultValue="outlined" name={i} >
-        <Radio value="a" label={data.a} variant="outlined" onChange={handleChange}/>
+      <RadioGroup defaultValue="outlined" name={i} onChange={handleChange}>
+        <Radio value="a" label={data.a} variant="outlined" />
         <Radio value="b" label={data.b} variant="outlined" onChange={handleChange}/>
         <Radio value="c" label={data.c} variant="outlined" onChange={handleChange}/>
         <Radio value="d" label={data.d} variant="outlined" onChange={handleChange}/>

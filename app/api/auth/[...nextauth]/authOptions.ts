@@ -10,7 +10,7 @@ const authOptions: NextAuthOptions  = {
   ],
   callbacks: {
     async signIn({ profile }) {
-      return profile.email.endsWith("@scarletmail.rutgers.edu")
+      return profile!.email!.endsWith("@scarletmail.rutgers.edu");
     }
   }
 }

@@ -1,13 +1,12 @@
 import { neon } from '@neondatabase/serverless';
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
-const sql = neon(process.env.DATABASE_URL);
+const sql = neon(process.env.DATABASE_URL!);
 
 
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   const data = await request.json();
-  // Handle the data here (e.g., save it to a database)
   console.log(data)
   const values = [...data.responses];
   values.push(data.email);

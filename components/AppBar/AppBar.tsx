@@ -19,8 +19,8 @@ function SignInButton() {
   const { data: session } = useSession();
 
   return (
-    <Button variant="outlined" color="danger" onClick={() => {session && session.user ? signOut() : signIn()}} >
-      {session && session.user ? "Sign Out" : "Sign In"}
+    <Button variant="outlined" color="danger" onClick={() => {session?.user ? signOut() : signIn()}} >
+      {session?.user ? "Sign Out" : "Sign In"}
     </Button>
   );
 }
