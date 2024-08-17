@@ -2,6 +2,8 @@ import styles from "./Dashboard.module.scss"
 import Avatar from '@mui/joy/Avatar';
 import { neon } from '@neondatabase/serverless';
 import { getServerSession } from "next-auth";
+import Link from "next/link";
+import Image from "next/image";
 
 async function getData(user) {
   const sql = neon(process.env.DATABASE_URL!);
@@ -29,7 +31,32 @@ export default async function Dashboard() {
 
   return (
     <div className={styles.main}>
-      <Avatar alt={data?.name} src={data?.image} />
+      <Module 
+      href='/home/questionnaire'
+      image="/images/rumvLogoOnly.svg" 
+      label="Questionnaire"
+      />
+      <Module 
+      href='/home/questionnaire'
+      image="/images/rumvLogoOnly.svg" 
+      label="Questionnaire"
+      />
+      <Module 
+      href='/home/questionnaire'
+      image="/images/rumvLogoOnly.svg" 
+      label="Questionnaire"
+      />
     </div>
   );
+}
+
+function Module({ href, image, label }) {
+  return (
+    <Link href={href}>
+      <div className={styles.moduleContainer}>
+        <h3>{label}</h3>
+        <Image src={image} alt={label} width="200" height="200"/>
+      </div>
+    </Link>
+  )
 }
