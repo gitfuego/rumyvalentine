@@ -10,3 +10,12 @@
   flex-direction: column;
   align-items: center;
 }
+
+#errorModal {
+  display: flex;
+  flex-direction: column;
+}
+
+dialog {
+  margin: auto;
+}

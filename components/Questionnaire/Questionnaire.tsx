@@ -31,11 +31,20 @@ const questions = [
 
 export default function Questionnaire() {
   const [ formData, setFormData ] = useState([]);
-  const [ errors, setErrors ] : [boolean[], any] = useState([]);
   const {data: session} = useSession();
   const router = useRouter();
 
   return (
+    <>
+    <dialog data-modal>
+      <div id="errorModal">
+        <div>You missed some questions, go back and fill everything out.</div>
+        <br />
+        <Button data-close-modal 
+        color='danger'
+        onClick={() =>  document.querySelector("dialog")!.close()}>Close</Button>
+      </div>
+    </dialog>
     <form
     onSubmit={(event) => {
     event.preventDefault();
@@ -43,12 +52,11 @@ export default function Questionnaire() {
     for (let i = 0; i < questions.length; i++) {
       if (!formData[i]) {
         errorFound = true;
-        const newErrors: boolean[] = [...errors];
-        newErrors[i] = true;
-        setErrors(newErrors)
       }
     }
-    if (errorFound) return;
+    if (errorFound) {
+      return document.querySelector("dialog")!.showModal();
+    }
     fetch('/api/responses', {
       method: "POST",
       body: JSON.stringify({responses: [...formData], email: session?.user?.email})
@@ -63,13 +71,14 @@ export default function Questionnaire() {
       data={q}
       setFormData={setFormData}
       i={index}
-      error={errors[index]}/>)}
+      />)}
       <Button type="submit">Submit</Button>
     </form>
+    </>
   );
 }
 
-function Question({ data, setFormData, i, error }) {
+function Question({ data, setFormData, i}) {
   function handleChange(e) {
     setFormData((formData) => {
       formData[i] = e.target.value;
@@ -78,7 +87,7 @@ function Question({ data, setFormData, i, error }) {
   }
 
   return (
-    <FormControl required error={error}>
+    <FormControl required>
       <FormLabel>{data.question}</FormLabel>
       <RadioGroup name={i} onChange={handleChange}>
         <Radio value="a" label={data.a} variant="outlined" />
@@ -86,7 +95,6 @@ function Question({ data, setFormData, i, error }) {
         <Radio value="c" label={data.c} variant="outlined" />
         <Radio value="d" label={data.d} variant="outlined" />
       </RadioGroup>
-      {error ? <FormHelperText>Please select an option.</FormHelperText> : <br/>}
     </FormControl>
   );
 }

@@ -11,7 +11,7 @@ export default function AppBar() {
   return (
     <header className={styles.header} >
       <a href='/' className={styles.logo}></a>
-      <h4>{session?.user?.email ?? ''}</h4>
+      <h4>{session?.user?.email ? session?.user?.email.substring(0, session?.user?.email.indexOf('@')) : ''}</h4>
       <SignInButton />
     </header>
   )
