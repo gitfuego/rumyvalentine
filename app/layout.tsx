@@ -7,6 +7,9 @@ import '@fontsource/inter'
 export default function RootLayout({ children }: {children: React.ReactNode}) {
   return (
     <html lang="en">
+      <head>
+        <link rel='icon' type="image/x-icon" href='/images/rumvLogoOnly.svg' />
+      </head>
       <body>
         <div id="wrapper">
         <AuthProvider>

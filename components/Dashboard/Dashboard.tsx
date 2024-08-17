@@ -9,25 +9,16 @@ async function getData(user) {
     const response = await sql(`SELECT * FROM Users WHERE email=$1`,
       [user.email]
     );
-    if (response[0] && response[0].image === user.image) return response[0];
-    else if (response[0]) {
-      const update = await sql(`UPDATE Users
-        SET image = $1 WHERE email = $2 RETURNING *`,
-        [ user.image, user.email ]
-      );
-      return update[0];
-
-    }
+    if (response[0]) return response[0];
     else {
-      const input = await sql(`INSERT INTO Users (name, email, image)
-        Values ($1, $2, $3) RETURNING *`,
-        [user.name, user.email, user.image]
+      const input = await sql(`INSERT INTO Users (name, email)
+        Values ($1, $2) RETURNING *`,
+        [user.name, user.email]
       );
       return input[0];
     }
   } catch (err) {
-    console.error(err);
-    return null;
+    return console.error(err);
   }
 }
 
@@ -37,11 +28,8 @@ export default async function Dashboard() {
   const data = await getData(session?.user);
 
   return (
-    <div>
+    <div className={styles.main}>
       <Avatar alt={data?.name} src={data?.image} />
-      {JSON.stringify(data)}
-      <br/>
-      {JSON.stringify(session)}
     </div>
   );
 }
