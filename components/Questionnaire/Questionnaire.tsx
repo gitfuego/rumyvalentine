@@ -36,8 +36,8 @@ export default function Questionnaire() {
 
   return (
     <>
-    <dialog data-modal>
-      <div id="errorModal">
+    <dialog data-modal className={styles.errorModal}>
+      <div className={styles.modalContainer}>
         <div>You missed some questions, go back and fill everything out.</div>
         <br />
         <Button data-close-modal 

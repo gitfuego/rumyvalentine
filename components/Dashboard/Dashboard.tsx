@@ -5,6 +5,32 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 import Image from "next/image";
 
+export default async function Dashboard() {
+  const session = await getServerSession();
+
+  const data = await getData(session?.user);
+
+  return (
+    <div className={styles.main}>
+      <Module 
+      href='/home/profile'
+      image="/images/rumvLogoOnly.svg" 
+      label="Profile"
+      />
+      <Module 
+      href='/home/questionnaire'
+      image="/images/rumvLogoOnly.svg" 
+      label="Questionnaire"
+      />
+      <Module 
+      href='/home#'
+      image="/images/rumvLogoOnly.svg" 
+      label="Matches"
+      />
+    </div>
+  );
+}
+
 async function getData(user) {
   const sql = neon(process.env.DATABASE_URL!);
   try {
@@ -22,32 +48,6 @@ async function getData(user) {
   } catch (err) {
     return console.error(err);
   }
-}
-
-export default async function Dashboard() {
-  const session = await getServerSession();
-
-  const data = await getData(session?.user);
-
-  return (
-    <div className={styles.main}>
-      <Module 
-      href='/home/questionnaire'
-      image="/images/rumvLogoOnly.svg" 
-      label="Questionnaire"
-      />
-      <Module 
-      href='/home/questionnaire'
-      image="/images/rumvLogoOnly.svg" 
-      label="Questionnaire"
-      />
-      <Module 
-      href='/home/questionnaire'
-      image="/images/rumvLogoOnly.svg" 
-      label="Questionnaire"
-      />
-    </div>
-  );
 }
 
 function Module({ href, image, label }) {
