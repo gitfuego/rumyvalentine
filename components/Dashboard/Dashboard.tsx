@@ -55,7 +55,7 @@ function Module({ href, image, label }) {
     <Link href={href}>
       <div className={styles.moduleContainer}>
         <h3>{label}</h3>
-        <Image src={image} alt={label} width="200" height="200"/>
+        <Image src={image} alt={label} width="180" height="180"/>
       </div>
     </Link>
   )

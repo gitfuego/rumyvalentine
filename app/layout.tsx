@@ -16,6 +16,7 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
           <CssVarsProvider>
             <CssBaseline />
             <AppBar />
+            <div id="bumper"></div>
             {children}
           </CssVarsProvider>
         </AuthProvider>
