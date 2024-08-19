@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 
 export default async function Page() {
   const session = await getServerSession();
-  const hasResponse = await getResponse(session?.user);
+  const hasResponse = await checkResponse(session!.user!.email);
   if (hasResponse) redirect('/home');
 
   return (
@@ -15,11 +15,11 @@ export default async function Page() {
   );
 }
 
-async function getResponse(user) {
+async function checkResponse(email) {
   const sql = neon(process.env.DATABASE_URL!);
   try {
     const response = await sql(`SELECT * FROM Responses WHERE email=$1`,
-      [user.email]
+      [email]
     );
     return response[0] !== undefined;
   } catch (err) {

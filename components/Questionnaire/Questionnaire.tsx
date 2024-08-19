@@ -30,8 +30,9 @@ const questions = [
 ];
 
 export default function Questionnaire() {
-  const [ formData, setFormData ] = useState([]);
   const {data: session} = useSession();
+  const [ formData, setFormData ] = useState([]);
+  const [ buttonLoading, setButtonLoading ] = useState(false);
   const router = useRouter();
 
   return (
@@ -57,6 +58,7 @@ export default function Questionnaire() {
     if (errorFound) {
       return document.querySelector("dialog")!.showModal();
     }
+    setButtonLoading(true);
     fetch('/api/responses', {
       method: "POST",
       body: JSON.stringify({responses: [...formData], email: session?.user?.email})
@@ -72,7 +74,9 @@ export default function Questionnaire() {
       setFormData={setFormData}
       i={index}
       />)}
-      <Button type="submit">Submit</Button>
+      <Button type="submit" 
+      loading={buttonLoading}
+      >Submit</Button>
     </form>
     </>
   );
