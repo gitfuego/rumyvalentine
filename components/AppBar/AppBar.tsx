@@ -1,12 +1,30 @@
 "use client";
 import { useSession, signOut, signIn } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import styles from "./AppBar.module.scss"
 import { Button } from '@mui/joy';
+import { usePathname } from 'next/navigation';
+import Loader from '../Loader/Loader';
 
 
 export default function AppBar() {
+  const path = usePathname();
+  const [ loading, setLoading ] = useState(path === '/' ? false : true)
   const { data: session } = useSession();
-  
+
+  useEffect(() => {
+    if (session?.user) setLoading(false);
+  }, [session]);
+
+  if (loading) {
+    return (
+      <header className={styles.header} >
+      <a href='/' className={styles.logo}></a>
+      <Loader />
+      <Loader />
+    </header>
+    );
+  }
 
   return (
     <header className={styles.header} >
@@ -22,10 +40,10 @@ function SignInButton() {
 
   return (
     <Button 
-    variant="soft" 
-    color={session?.user ? "danger" : "primary"} 
+    variant="solid" 
+    color={session?.user ? "neutral" : "danger"} 
     onClick={() => {session?.user ? signOut() : signIn()}} >
-      {session?.user ? "Sign Out" : "Sign In"}
+      {session?.user ? "Sign Out" : "Scarletmail Sign In"}
     </Button>
   );
 }
