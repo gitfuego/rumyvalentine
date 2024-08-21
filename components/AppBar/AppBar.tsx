@@ -9,11 +9,11 @@ import Loader from '../Loader/Loader';
 
 export default function AppBar() {
   const path = usePathname();
-  const [ loading, setLoading ] = useState(path === '/' ? false : true)
+  const [ loading, setLoading ] = useState(path !== '/')
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (session?.user) setLoading(false);
+    if (session?.user || path === '/user-agreement') setLoading(false);
   }, [session]);
 
   if (loading) {

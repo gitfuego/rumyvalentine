@@ -1,4 +1,4 @@
-import { CssBaseline, CssVarsProvider } from '@mui/joy'
+import { CssBaseline, CssVarsProvider, Link } from '@mui/joy'
 import AppBar from '../components/AppBar/AppBar'
 import AuthProvider from '../components/AuthProvider/AuthProvider'
 import './global.scss'
@@ -25,6 +25,10 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
           </CssVarsProvider>
         </AuthProvider>
         </div>
+        <hr style={{width: '100%'}}/>
+        <footer>
+          <span><img src='/images/logoHeartOnly.svg' />Created with love in New Brunswick | &nbsp; <Link href="/user-agreement">User Agreement</Link></span>
+        </footer>
       </body>
     </html>
   )

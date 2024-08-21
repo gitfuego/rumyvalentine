@@ -9,7 +9,7 @@ export default async function Dashboard() {
   const session = await getServerSession();
 
   await addUser(session?.user);
-  const didQuestionnaire = await checkResponse(session!.user!.email)
+  const didQuestionnaire = await checkResponse(session?.user?.email)
 
   return (
     <div className={styles.main}>
@@ -70,8 +70,11 @@ async function checkResponse(email) {
 }
 
 function Module({ href, image, label, completed }) {
+  if (label === "Matches") completed = new Date('2025-02-10T00:00:00') > new Date();
+  console.log(label, completed);
+
   return (
-    <Link href={href} disabled={label === "Questionnaire" ? completed : false}>
+    <Link href={href} disabled={label !== "Profile" ? completed : false}>
       <div className={styles.moduleContainer}>
         <h3>{label}</h3>
         <Image src={image} alt={label} width="180" height="180"/>

@@ -5,11 +5,6 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl;
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-   // Allow requests to public assets like images, CSS, etc.
-   if (pathname.startsWith('/images')) {
-    return NextResponse.next();
-  }
-
   // Move logged in users to homepage if they try to access the landing page
   if (token && pathname === '/') {
     const url = req.nextUrl.clone();
@@ -17,8 +12,8 @@ export async function middleware(req) {
     return NextResponse.redirect(url);
   }
 
-  // Allow requests if the token exists or the request is for the landing page or authentication routes
-  if (token || pathname === '/' || pathname.startsWith('/api/auth')) {
+  // Allow requests if the token exists or the request is landing page
+  if (token || pathname === '/') {
     return NextResponse.next();
   }
 
@@ -32,6 +27,7 @@ export async function middleware(req) {
   return NextResponse.next();
 }
 
+// don't match for public routes
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico|images|user-agreement).*)'],
 };
