@@ -1,38 +1,40 @@
 import styles from "./Dashboard.module.scss"
-import Avatar from '@mui/joy/Avatar';
 import { neon } from '@neondatabase/serverless';
 import { getServerSession } from "next-auth";
 import { Link } from "@mui/joy";
 import Image from "next/image";
+import AgreementPrompt from "./AgreementPrompt";
 
 export default async function Dashboard() {
   const session = await getServerSession();
 
   const agreed = await addUser(session?.user);
-  console.log(agreed)
-  const didQuestionnaire = await checkResponse(session?.user?.email)
+  const didQuestionnaire = await checkResponse(session?.user?.email);
 
   return (
-    <div className={styles.main}>
-      <Module
-      completed={false}
-      href='/home/profile'
-      image="/images/rumvLogoOnly.svg" 
-      label="Profile"
-      />
-      <Module 
-      completed={didQuestionnaire}
-      href='/home/questionnaire'
-      image="/images/rumvLogoOnly.svg" 
-      label="Questionnaire"
-      />
-      <Module 
-      completed={false}
-      href='/home#'
-      image="/images/rumvLogoOnly.svg" 
-      label="Matches"
-      />
-    </div>
+    <>
+      {!agreed && <AgreementPrompt />}
+      <div className={styles.main}>
+        <Module
+        completed={false}
+        href='/home/profile'
+        image="/images/rumvLogoOnly.svg" 
+        label="Profile"
+        />
+        <Module 
+        completed={didQuestionnaire}
+        href='/home/questionnaire'
+        image="/images/rumvLogoOnly.svg" 
+        label="Questionnaire"
+        />
+        <Module 
+        completed={false}
+        href='/home#'
+        image="/images/rumvLogoOnly.svg" 
+        label="Matches"
+        />
+      </div>
+    </>
   );
 }
 

@@ -35,20 +35,8 @@ export default function Questionnaire() {
   const [ buttonLoading, setButtonLoading ] = useState(false);
   const router = useRouter();
 
-  return (
-    <>
-    <dialog data-modal className={styles.errorModal}>
-      <div className={styles.modalContainer}>
-        <div>You missed some questions, go back and fill everything out.</div>
-        <br />
-        <Button data-close-modal 
-        color='danger'
-        onClick={() =>  document.querySelector("dialog")!.close()}>Close</Button>
-      </div>
-    </dialog>
-    <form
-    onSubmit={(event) => {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
     let errorFound = false;
     for (let i = 0; i < questions.length; i++) {
       if (!formData[i]) {
@@ -66,7 +54,21 @@ export default function Questionnaire() {
     .then(() => {
       router.push('/home');
     })
-    }}
+  }
+
+  return (
+    <>
+    <dialog data-modal className={styles.errorModal}>
+      <div className={styles.modalContainer}>
+        <div>You missed some questions, go back and fill everything out.</div>
+        <br />
+        <Button data-close-modal 
+        color='danger'
+        onClick={() =>  document.querySelector("dialog")!.close()}>Close</Button>
+      </div>
+    </dialog>
+    <form
+    onSubmit={handleSubmit}
     >
       {questions.map((q, index) => <Question 
       key={'qgroup' + index}

@@ -25,6 +25,21 @@
   }
 }
 
+.errorModal {
+  width: 50%;
+  border-radius: 10px;
+  margin: auto;
+  font-size: larger !important;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  & * {
+    text-align: center;
+  }
+}
+
 
 @media (max-width: 768px) {
   .main {

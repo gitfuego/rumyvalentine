@@ -4,14 +4,12 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 const sql = neon(process.env.DATABASE_URL!);
 
-
-
 export async function GET(request: NextRequest, { params }) {
   const values = [params.user];
-  const insertQuery = `SELECT * FROM Responses
+  const selectQuery = `SELECT * FROM Responses
   WHERE email=$1;`;
   try {
-    const response = await sql(insertQuery, values);
+    const response = await sql(selectQuery, values);
     if (response[0]) {
       return new NextResponse(JSON.stringify({ ...response[0] }), {
         status: 200,

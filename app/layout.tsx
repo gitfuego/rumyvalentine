@@ -27,7 +27,7 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
         </Box>
         <hr style={{width: '100%'}}/>
         <Box component="footer">
-          <span><img src='/images/logoHeartOnly.svg' />&nbsp;Created with love in New Brunswick | &nbsp; <Link href="/user-agreement">User Agreement</Link></span>
+          <span><img src='/images/logoHeartOnly.svg' />&nbsp;Created with love in New Jersey | &nbsp; <Link href="/user-agreement">User Agreement</Link></span>
         </Box>
       </body>
     </html>
