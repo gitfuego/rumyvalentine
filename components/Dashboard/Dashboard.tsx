@@ -8,7 +8,8 @@ import Image from "next/image";
 export default async function Dashboard() {
   const session = await getServerSession();
 
-  await addUser(session?.user);
+  const agreed = await addUser(session?.user);
+  console.log(agreed)
   const didQuestionnaire = await checkResponse(session?.user?.email)
 
   return (
@@ -42,14 +43,15 @@ async function addUser(user) {
     const response = await sql(`SELECT * FROM Users WHERE email=$1`,
       [user.email]
     );
+    if (response[0]) return response[0].agreed;
 
     // if not, add them
-    if (!response[0]) {
-      await sql(`INSERT INTO Users (name, email)
+    else {
+      const insertion = await sql(`INSERT INTO Users (name, email)
         Values ($1, $2) RETURNING *`,
         [user.name, user.email]
       );
-      return;
+      return insertion[0].agreed;
     }
   } catch (err) {
     return console.error(err);
@@ -71,7 +73,6 @@ async function checkResponse(email) {
 
 function Module({ href, image, label, completed }) {
   if (label === "Matches") completed = new Date('2025-02-10T00:00:00') > new Date();
-  console.log(label, completed);
 
   return (
     <Link href={href} disabled={label !== "Profile" ? completed : false}>

@@ -1,4 +1,4 @@
-import { CssBaseline, CssVarsProvider, Link } from '@mui/joy'
+import { CssBaseline, CssVarsProvider, Link, Box } from '@mui/joy'
 import AppBar from '../components/AppBar/AppBar'
 import AuthProvider from '../components/AuthProvider/AuthProvider'
 import './global.scss'
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
         <meta name="keywords" content="Rutgers, RUMV, Valentine" />
       </head>
       <body>
-        <div id="wrapper">
+        <Box id="wrapper">
         <AuthProvider>
           <CssVarsProvider>
             <CssBaseline />
@@ -24,11 +24,11 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
             {children}
           </CssVarsProvider>
         </AuthProvider>
-        </div>
+        </Box>
         <hr style={{width: '100%'}}/>
-        <footer>
-          <span><img src='/images/logoHeartOnly.svg' />Created with love in New Brunswick | &nbsp; <Link href="/user-agreement">User Agreement</Link></span>
-        </footer>
+        <Box component="footer">
+          <span><img src='/images/logoHeartOnly.svg' />&nbsp;Created with love in New Brunswick | &nbsp; <Link href="/user-agreement">User Agreement</Link></span>
+        </Box>
       </body>
     </html>
   )
