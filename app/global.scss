@@ -1,6 +1,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  transition: background-color 0.3s ease-in-out;
 }
 
 #bumper {
@@ -21,8 +22,9 @@
 footer {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
-  padding: 20px 10%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   height: 10vh;
   min-height: 60px;
   
@@ -31,7 +33,7 @@ footer {
     align-items: center;
   }
   & img {
-    width: 30px;
+    width: 20px;
   }
   & * {
     font-size: small !important;

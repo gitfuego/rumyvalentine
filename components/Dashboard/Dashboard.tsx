@@ -1,19 +1,19 @@
 import styles from "./Dashboard.module.scss"
 import { neon } from '@neondatabase/serverless';
 import { getServerSession } from "next-auth";
-import { Link } from "@mui/joy";
+import { Link, Typography } from "@mui/joy";
 import Image from "next/image";
 import AgreementPrompt from "./AgreementPrompt";
 
 export default async function Dashboard() {
   const session = await getServerSession();
 
-  const agreed = await addUser(session?.user);
+  const user = await getUser(session?.user);
   const didQuestionnaire = await checkResponse(session?.user?.email);
 
   return (
     <>
-      {!agreed && <AgreementPrompt />}
+      {!user!.agreed && <AgreementPrompt />}
       <div className={styles.main}>
         <Module
         completed={false}
@@ -38,14 +38,14 @@ export default async function Dashboard() {
   );
 }
 
-async function addUser(user) {
+async function getUser(user) {
   const sql = neon(process.env.DATABASE_URL!);
   try {
     // check if user is in database
     const response = await sql(`SELECT * FROM Users WHERE email=$1`,
       [user.email]
     );
-    if (response[0]) return response[0].agreed;
+    if (response[0]) return response[0];
 
     // if not, add them
     else {
@@ -53,7 +53,7 @@ async function addUser(user) {
         Values ($1, $2) RETURNING *`,
         [user.name, user.email]
       );
-      return insertion[0].agreed;
+      return insertion[0];
     }
   } catch (err) {
     return console.error(err);
@@ -74,13 +74,17 @@ async function checkResponse(email) {
 }
 
 function Module({ href, image, label, completed }) {
-  if (label === "Matches") completed = new Date('2025-02-10T00:00:00') > new Date();
+  let disabled = completed;
+  if (label === "Matches") disabled = new Date('2025-02-10T00:00:00') > new Date();
+  else if (label === "Profile") disabled = false;
 
   return (
-    <Link href={href} disabled={label !== "Profile" ? completed : false}>
+    <Link href={href} disabled={disabled}>
       <div className={styles.moduleContainer}>
-        <h3>{label}</h3>
         <Image src={image} alt={label} width="180" height="180"/>
+        <Typography level="h3" fontSize="l">
+          {label}
+        </Typography>
       </div>
     </Link>
   )
