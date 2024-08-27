@@ -18,19 +18,38 @@ export default function AppBar() {
 
   useEffect(() => {
     let prevScrollpos = window.scrollY;
-    window.onscroll = function() {
+  
+    function handleScroll() {
       const currentScrollPos = window.scrollY;
-      const header = document.querySelector("header")!;
+      const header = document.querySelector("header");
+      if (!header) return;
+  
       if (prevScrollpos > currentScrollPos) {
         header.style.top = "0";
-        header.style.boxShadow = "0 0 8px gray"
+        header.style.boxShadow = "0 0 8px gray";
       } else {
         header.style.top = "-10vh";
         header.style.boxShadow = "none";
       }
       prevScrollpos = currentScrollPos;
-}
-  })
+    }
+  
+
+    window.addEventListener('scroll', handleScroll);
+  
+    // Initial setting of the header's position to avoid abrupt animation on load
+    const header = document.querySelector("header");
+    if (header) {
+      header.style.transition = 'top 0.3s ease-in-out, box-shadow 0.3s ease-in-out';
+      header.style.top = "0";
+    }
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
+  
 
   if (loading) {
     return (
@@ -65,11 +84,12 @@ function SignInButton() {
   const { data: session } = useSession();
 
   return (
-    <Button 
+    <Button
+    className={`${session?.user ? '' : styles.signIn}`}
     variant="solid" 
     color={session?.user ? "neutral" : "danger"} 
     onClick={() => {session?.user ? signOut() : signIn()}} >
-      {session?.user ? "Sign Out" : "Scarletmail Sign In"}
+      {session?.user ? "Sign Out" : "Sign In"}
     </Button>
   );
 }
@@ -79,8 +99,13 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(false);
+  }, [])
   return (
-    <DarkModeSwitch
+    loading ? <Loader />: <DarkModeSwitch
+    moonColor='white'
     checked={mode === 'dark'}
     onChange={() => {
       setMode(mode === 'dark' ? 'light' : 'dark')}

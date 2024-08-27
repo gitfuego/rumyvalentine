@@ -1,13 +1,8 @@
+import { Box } from '@mui/joy'
 import styles from './Loader.module.scss'
 
-export default function({color = 'black'}) {
-  
+export default function() {
   return (
-    <div className={styles.ldsellipsis}>
-      <div style={{backgroundColor: color}}></div>
-      <div style={{backgroundColor: color}}></div>
-      <div style={{backgroundColor: color}}></div>
-      <div style={{backgroundColor: color}}></div>
-    </div>
+    <Box component="span" className={styles.loader}/>
   )
 }

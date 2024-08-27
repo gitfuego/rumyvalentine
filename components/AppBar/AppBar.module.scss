@@ -1,4 +1,10 @@
 .header {
+  :root[data-joy-color-scheme='light'] & {
+    background-color: white;
+  }
+  :root[data-joy-color-scheme='dark'] & {
+    background-color: black;
+  }
   z-index: 1;
   box-sizing: border-box;
   position: fixed;
@@ -10,17 +16,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.3s ease-in-out
+  transition: all 0.3s ease-in-out;
 }
-
-:root[data-joy-color-scheme='light'] .header {
-  background-color: white;
-}
-
-:root[data-joy-color-scheme='dark'] .header {
-  background-color: black;
-}
-
 
 .logo {
   background-position: center;
@@ -37,6 +34,11 @@
 
 .logoContainer, .nav {
   width: 150px;
+  min-width: fit-content;
+  gap: 5px;
+}
+
+.darkModeContainer, .logoContainer, .nav {
   display: flex;
   align-items: center;
   justify-content: space-evenly;

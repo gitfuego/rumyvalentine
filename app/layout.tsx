@@ -1,4 +1,5 @@
 import { CssBaseline, CssVarsProvider, Link, Box } from '@mui/joy'
+import InitColorSchemeScipt from '@mui/joy/InitColorSchemeScript'
 import AppBar from '../components/AppBar/AppBar'
 import AuthProvider from '../components/AuthProvider/AuthProvider'
 import './global.scss'
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
       <body>
         <Box id="wrapper">
         <AuthProvider>
+          <InitColorSchemeScipt />
           <CssVarsProvider>
             <CssBaseline />
             <AppBar />
