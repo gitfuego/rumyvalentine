@@ -1,28 +1,27 @@
 "use client"
-import { FormControl, Radio, RadioGroup, Button, FormLabel, FormHelperText } from '@mui/joy';
+import { FormControl, Radio, RadioGroup, Button, FormLabel, Input, Box } from '@mui/joy';
+import { Modal, ModalDialog, ModalClose } from '@mui/joy';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import styles from "./Profile.module.scss";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { error } from 'console';
 
 
 
 export default function Profile() {
   const {data: session} = useSession();
-  const [ formData, setFormData ] = useState([]);
+  const { register, handleSubmit } = useForm();
   const [ buttonLoading, setButtonLoading ] = useState(false);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    let errorFound = false;
-    if (errorFound) {
-      return document.querySelector("dialog")!.showModal();
-    }
+  function onSubmit(d) {
     setButtonLoading(true);
-    fetch('/api/responses', {
+    fetch('/api/profileUpdate', {
       method: "POST",
-      body: JSON.stringify({responses: [...formData], email: session?.user?.email})
+      body: JSON.stringify({responses: {...d}, email: session?.user?.email})
     })
     .then(() => {
       router.push('/home');
@@ -31,21 +30,48 @@ export default function Profile() {
 
   return (
     <>
-    <dialog data-modal className={styles.errorModal}>
-      <div className={styles.modalContainer}>
-        <div>You missed some questions, go back and fill everything out.</div>
-        <br />
-        <Button data-close-modal 
+    <Modal open={open} onClose={() => setOpen(false)}>
+      <ModalDialog >
+        <ModalClose 
         color='danger'
-        onClick={() =>  document.querySelector("dialog")!.close()}>Close</Button>
-      </div>
-    </dialog>
+        />
+        <br />
+        <div>Make sure everything is filled out.</div>
+        <br />
+      </ModalDialog>
+    </Modal>
     <form
-    onSubmit={handleSubmit}
-    > 
-      <Button type="submit" 
-      loading={buttonLoading}
-      >Submit</Button>
+    className={styles.form}
+    onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormControl required>
+        <FormLabel>Name</FormLabel>
+        <Input {...register("name", {required: true, minLength: 1, maxLength: 20})} 
+        placeholder='Display Name'
+        />
+      </FormControl>
+      <FormControl required>
+        <FormLabel>Biological Sex</FormLabel>
+        <RadioGroup>
+          <Radio value="m" label="Male" variant="outlined" {...register("sex", {required: true})}/>
+          <Radio value="f" label="Female" variant="outlined" {...register("sex", {required: true})}/>
+        </RadioGroup>
+      </FormControl>
+      <FormControl required>
+        <FormLabel>Looking For...</FormLabel>
+        <RadioGroup>
+          <Radio value="m" label="Males" variant="outlined" {...register("pref", {required: true})}/>
+          <Radio value="f" label="Females" variant="outlined" {...register("pref", {required: true})} />
+          <Radio value="a" label="Any" variant="outlined" {...register("pref", {required: true})}/>
+        </RadioGroup>
+      </FormControl>
+      <Box component="span">
+        <Button type="submit" 
+        loading={buttonLoading}
+        >Submit</Button>
+        <Button type="button" color='neutral'
+        onClick={() => router.back()}>Cancel</Button>
+      </Box>
     </form>
     </>
   );

@@ -1,7 +1,8 @@
 "use client"
 import { FormControl, Radio, RadioGroup, Button, FormLabel, FormHelperText } from '@mui/joy';
+import { Modal, ModalDialog, ModalClose } from '@mui/joy';
 import { useState } from 'react';
-import styles from './Questionnaire.module.scss';
+import styles from '../Profile/Profile.module.scss';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -33,6 +34,7 @@ export default function Questionnaire() {
   const {data: session} = useSession();
   const [ formData, setFormData ] = useState([]);
   const [ buttonLoading, setButtonLoading ] = useState(false);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   function handleSubmit(e) {
@@ -44,7 +46,7 @@ export default function Questionnaire() {
       }
     }
     if (errorFound) {
-      return document.querySelector("dialog")!.showModal();
+      return setOpen(true);
     }
     setButtonLoading(true);
     fetch('/api/responses', {
@@ -58,16 +60,18 @@ export default function Questionnaire() {
 
   return (
     <>
-    <dialog data-modal className={styles.errorModal}>
-      <div className={styles.modalContainer}>
+    <Modal open={open} onClose={() => setOpen(false)}>
+      <ModalDialog >
+        <ModalClose 
+        color='danger'
+        />
+        <br />
         <div>You missed some questions, go back and fill everything out.</div>
         <br />
-        <Button data-close-modal 
-        color='danger'
-        onClick={() =>  document.querySelector("dialog")!.close()}>Close</Button>
-      </div>
-    </dialog>
+      </ModalDialog>
+    </Modal>
     <form
+    className={styles.form}
     onSubmit={handleSubmit}
     >
       {questions.map((q, index) => <Question 

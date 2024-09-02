@@ -27,8 +27,9 @@ import { getServerSession } from "next-auth";
 
 export async function POST(request: NextRequest) {
   try {
-
-    return NextResponse.json({success:true})
+    const body = await request.json();
+    console.log(body)
+    return NextResponse.json({response:JSON.stringify(body)})
   } catch (error) {
     return NextResponse.json({error,success: false})
   }
