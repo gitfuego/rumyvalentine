@@ -6,13 +6,17 @@ import { useState } from 'react';
 import styles from "./Profile.module.scss";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { error } from 'console';
 
 
 
-export default function Profile() {
+export default function Profile({user}) {
   const {data: session} = useSession();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({ defaultValues: {
+    name: user.name,
+    sex: user.sex,
+    pref: user.pref,
+    }
+  });
   const [ buttonLoading, setButtonLoading ] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -52,14 +56,14 @@ export default function Profile() {
       </FormControl>
       <FormControl required>
         <FormLabel>Biological Sex</FormLabel>
-        <RadioGroup>
+        <RadioGroup defaultValue={user.sex}>
           <Radio value="m" label="Male" variant="outlined" {...register("sex", {required: true})}/>
           <Radio value="f" label="Female" variant="outlined" {...register("sex", {required: true})}/>
         </RadioGroup>
       </FormControl>
       <FormControl required>
         <FormLabel>Looking For...</FormLabel>
-        <RadioGroup>
+        <RadioGroup defaultValue={user.pref}>
           <Radio value="m" label="Males" variant="outlined" {...register("pref", {required: true})}/>
           <Radio value="f" label="Females" variant="outlined" {...register("pref", {required: true})} />
           <Radio value="a" label="Any" variant="outlined" {...register("pref", {required: true})}/>
