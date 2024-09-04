@@ -1,40 +1,60 @@
 import styles from "./Dashboard.module.scss"
 import { neon } from '@neondatabase/serverless';
 import { getServerSession } from "next-auth";
-import { Link, Typography } from "@mui/joy";
+import { Link, Typography, Step, StepIndicator } from "@mui/joy";
 import Image from "next/image";
-import AgreementPrompt from "./AgreementPrompt";
+import AgreementPrompt from "../Dashboard/AgreementPrompt";
+import AdaptiveStepper from "./AdaptiveStepper";
 
 export default async function Dashboard() {
   const session = await getServerSession();
-
   const user = await getUser(session?.user);
-  const didProfile = user!.pref !== null;
   const didQuestionnaire = await checkResponse(session?.user?.email);
+  const didProfile = user!.pref !== null;
 
   return (
     <>
       {!user!.agreed && <AgreementPrompt />}
-      <div className={styles.main}>
+      <main className={styles.main}>
+      <AdaptiveStepper>
+      <Step
+        orientation="vertical"
+        indicator={
+          <StepIndicator variant="solid" color="danger">
+            1
+          </StepIndicator>
+        }
+        >
         <Module
         completed={didProfile}
         href='/home/profile'
         image="/images/rumvLogoOnly.svg" 
         label="Profile"
         />
+      </Step>
+      <Step
+        orientation="vertical"
+        indicator={<StepIndicator variant="outlined">2</StepIndicator>}
+        >
         <Module 
         completed={didQuestionnaire}
         href='/home/questionnaire'
         image="/images/rumvLogoOnly.svg" 
         label="Questionnaire"
         />
-        <Module 
+      </Step>
+      <Step orientation="vertical"
+      indicator={<StepIndicator variant="outlined">3</StepIndicator>}
+      >
+      <Module 
         completed={false}
         href='/home#'
         image="/images/rumvLogoOnly.svg" 
         label="Matches"
         />
-      </div>
+      </Step>
+    </AdaptiveStepper>
+    </main>
     </>
   );
 }
@@ -90,3 +110,33 @@ function Module({ href, image, label, completed }) {
     </Link>
   )
 }
+
+// import Stepper from '@mui/joy/Stepper';
+// import Step from '@mui/joy/Step';
+// import StepIndicator from '@mui/joy/StepIndicator';
+
+// export default function IndicatorTopStepper() {
+//   return (
+    // <Stepper sx={{ width: '100%' }}>
+    //   <Step
+    //     orientation="vertical"
+    //     indicator={
+    //       <StepIndicator variant="solid" color="neutral">
+    //         1
+    //       </StepIndicator>
+    //     }
+    //   >
+    //     1
+    //   </Step>
+    //   <Step
+    //     orientation="vertical"
+    //     indicator={<StepIndicator variant="outlined">2</StepIndicator>}
+    //   >
+    //     2
+    //   </Step>
+    //   <Step orientation="vertical" indicator={<StepIndicator>3</StepIndicator>}>
+    //     3
+    //   </Step>
+    // </Stepper>
+//   );
+// }

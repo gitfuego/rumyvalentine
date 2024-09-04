@@ -1,15 +1,19 @@
-import styles from './Dashboard.module.scss';
+"use client"
+import { useState } from 'react';
+import {Modal, ModalDialog} from "@mui/joy";
 import PromptClose from './PromptClose';
 
 export default function AgreementPrompt() {
+  const [open, setOpen] = useState(true);
 
   return (
-    <dialog data-modal className={styles.errorModal}>
-        <div className={styles.modalContainer}>
-          <span>By using this app, you acknowledge that you have read, understood, and agree to be bound by the <a target="_blank" href="/user-agreement">User Agreement</a>.</span>
-          <br/>
-          <PromptClose />
-        </div>
-    </dialog>
+    <Modal open={open} onClose={() => undefined}>
+    <ModalDialog >
+      <br />
+      <span>By using this app, you acknowledge that you have read, understood, and agree to be bound by the <a target="_blank" href="/user-agreement">User Agreement</a>.</span>
+      <br />
+      <PromptClose setOpen={setOpen} />
+    </ModalDialog>
+  </Modal>
   )
 }
