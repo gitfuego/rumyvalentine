@@ -104,7 +104,7 @@ function ModeToggle() {
     setLoading(false);
   }, [])
   return (
-    loading ? <Loader />: <DarkModeSwitch
+    loading ? <Loader /> : <DarkModeSwitch
     moonColor='white'
     checked={mode === 'dark'}
     onChange={() => {

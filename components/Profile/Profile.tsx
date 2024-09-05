@@ -49,7 +49,7 @@ export default function Profile({user}) {
     onSubmit={handleSubmit(onSubmit)}
     >
       <FormControl required>
-        <FormLabel>Name</FormLabel>
+        <FormLabel>Preferred Name</FormLabel>
         <Input {...register("name", {required: true, minLength: 1, maxLength: 20})} 
         placeholder='Display Name'
         />
