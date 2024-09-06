@@ -3,7 +3,6 @@ import { FormControl, Radio, RadioGroup, Button, FormLabel, Box } from '@mui/joy
 import { Modal, ModalDialog, ModalClose } from '@mui/joy';
 import { useState } from 'react';
 import styles from '../Profile/Profile.module.scss';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 const questions = [
@@ -30,8 +29,7 @@ const questions = [
   },
 ];
 
-export default function Questionnaire() {
-  const {data: session} = useSession();
+export default function Questionnaire({user}) {
   const [ formData, setFormData ] = useState([]);
   const [ buttonLoading, setButtonLoading ] = useState(false);
   const [open, setOpen] = useState(false);
@@ -51,7 +49,7 @@ export default function Questionnaire() {
     setButtonLoading(true);
     fetch('/api/responses', {
       method: "POST",
-      body: JSON.stringify({responses: [...formData], email: session?.user?.email})
+      body: JSON.stringify({responses: [...formData], email: user?.email})
     })
     .then(() => {
       router.push('/home');

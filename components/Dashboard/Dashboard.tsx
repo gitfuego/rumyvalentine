@@ -30,7 +30,7 @@ export default async function Dashboard() {
             <Module
             completed={didProfile}
             href='/home/profile'
-            image="/images/rumvLogoOnly.svg" 
+            image="/images/profileIcon.svg" 
             label="Profile"
             />
             <Typography sx={{textAlign: 'center'}}>What others see</Typography>
@@ -45,7 +45,7 @@ export default async function Dashboard() {
           <Module 
           completed={didQuestionnaire}
           href='/home/questionnaire'
-          image="/images/rumvLogoOnly.svg" 
+          image="/images/surveyIcon.svg" 
           label="Questionnaire"
           />
           <Typography sx={{textAlign: 'center'}} >What nobody sees</Typography>

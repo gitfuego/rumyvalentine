@@ -6,11 +6,11 @@ import { getServerSession } from "next-auth";
 export default async function Page() {
   const session = await getServerSession();
   const hasResponse = await checkResponse(session!.user!.email);
-  // if (hasResponse) redirect('/home');
+  if (hasResponse) return redirect('/home');
 
   return (
     <>
-      <Questionnaire />
+      <Questionnaire user={session!.user} />
     </>
   );
 }

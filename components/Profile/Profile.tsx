@@ -72,7 +72,6 @@ export default function Profile({user}) {
         </RadioGroup>
       </FormControl>
       <Box>
-      <Box>
         <FormControl required>
           <FormLabel>Contact Type</FormLabel>
           <FormHelperText>How will your matches contact you?</FormHelperText>
@@ -83,7 +82,6 @@ export default function Profile({user}) {
             <Option value="o">Other (specify)</Option>
           </Select>
         </FormControl>
-        </Box>
         <br />
         <FormControl required>
           <FormLabel>Contact</FormLabel>

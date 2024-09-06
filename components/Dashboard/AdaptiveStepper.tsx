@@ -4,7 +4,7 @@ import Stepper from '@mui/joy/Stepper';
 import { useState, useEffect } from 'react';
 
 export default function AdaptiveStepper({children}) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768 ?? false);
 
   useEffect(() => {
     const handleResize = () => {

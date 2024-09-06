@@ -7,7 +7,6 @@ const sql = neon(process.env.DATABASE_URL!);
 
 export async function POST(request: NextRequest) {
   const data = await request.json();
-  console.log(data)
   const values = [...data.responses];
   values.push(data.email);
   const insertQuery = `INSERT INTO Responses ( res1, res2, res3, email )
