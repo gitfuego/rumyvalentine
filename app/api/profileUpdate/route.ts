@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { neon } from '@neondatabase/serverless';
+import { NextResponse, type NextRequest } from 'next/server';
+
+const sql = neon(process.env.DATABASE_URL!);
 // import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 // const s3Client = new S3Client({
@@ -26,10 +28,15 @@ import { getServerSession } from "next-auth";
 // }
 
 export async function POST(request: NextRequest) {
+  const data = await request.json();
+  const {name, sex, pref, contact, ctype} = data.responses;
+  const values = [name, sex, pref, contact, ctype];
+  values.push(data.email);
+  const updateQuery = `UPDATE users SET name = $1, sex = $2, pref = $3, contact = $4, ctype = $5
+  WHERE email = $6;`;
   try {
-    const body = await request.json();
-    console.log(body)
-    return NextResponse.json({response:JSON.stringify(body)})
+    await sql(updateQuery, values);
+    return NextResponse.json({success:true})
   } catch (error) {
     return NextResponse.json({error,success: false})
   }

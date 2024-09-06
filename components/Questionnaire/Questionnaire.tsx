@@ -1,5 +1,5 @@
 "use client"
-import { FormControl, Radio, RadioGroup, Button, FormLabel, FormHelperText } from '@mui/joy';
+import { FormControl, Radio, RadioGroup, Button, FormLabel, Box } from '@mui/joy';
 import { Modal, ModalDialog, ModalClose } from '@mui/joy';
 import { useState } from 'react';
 import styles from '../Profile/Profile.module.scss';
@@ -97,14 +97,16 @@ function Question({ data, setFormData, i}) {
   }
 
   return (
-    <FormControl required>
-      <FormLabel>{data.question}</FormLabel>
-      <RadioGroup name={i} onChange={handleChange}>
-        <Radio value="a" label={data.a} variant="outlined" />
-        <Radio value="b" label={data.b} variant="outlined" />
-        <Radio value="c" label={data.c} variant="outlined" />
-        <Radio value="d" label={data.d} variant="outlined" />
-      </RadioGroup>
-    </FormControl>
+    <Box>
+      <FormControl required>
+        <FormLabel>{data.question}</FormLabel>
+        <RadioGroup name={i} onChange={handleChange}>
+          <Radio value="a" label={data.a} variant="outlined" />
+          <Radio value="b" label={data.b} variant="outlined" />
+          <Radio value="c" label={data.c} variant="outlined" />
+          <Radio value="d" label={data.d} variant="outlined" />
+        </RadioGroup>
+      </FormControl>
+    </Box>
   );
 }

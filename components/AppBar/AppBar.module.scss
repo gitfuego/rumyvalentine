@@ -30,6 +30,9 @@
   &:hover {
     filter: drop-shadow(2px 2px 2px rgb(132, 132, 132));
   }
+  :root[data-joy-color-scheme='dark'] & {
+    filter: none;
+  }
 }
 
 .logoContainer, .nav {

@@ -6,7 +6,6 @@ export default async function Page() {
   const session = await getServerSession();
   const user = await getUser(session!.user!.email);
 
-
   return (
     <>
       <Profile user={user} />
