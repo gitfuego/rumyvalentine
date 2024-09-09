@@ -113,7 +113,7 @@ function Module({ href, image, label, completed }) {
 
   return (
     <Link href={href} disabled={disabled}>
-      <div className={styles.moduleContainer}>
+      <div className={`${styles.moduleContainer} ${disabled ? styles.disabled : ''}`} >
         <Image src={image} alt={label} width="180" height="180"/>
         <Typography level="h3" fontSize="l">
           {label}

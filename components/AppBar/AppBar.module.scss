@@ -1,11 +1,11 @@
 .header {
   :root[data-joy-color-scheme='light'] & {
-    background-color: white;
+    background-color: #f9f9f9;
   }
   :root[data-joy-color-scheme='dark'] & {
     background-color: black;
   }
-  z-index: 2;
+  z-index: 4;
   box-sizing: border-box;
   position: fixed;
   width: 100%;
@@ -33,6 +33,38 @@
   :root[data-joy-color-scheme='dark'] & {
     filter: none;
   }
+}
+
+.middleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.pullTabContainer {
+  z-index: 3;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pullTab {
+  all: unset;
+  cursor: pointer;
+  background-image: url('/images/downIcon.svg');
+  background-position: center;
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-color: #f9f9f9;
+  box-sizing: content-box;
+  padding: 5px;
+  border-radius: 0px 0px 6px 6px;
+  width: 22px;
+  height: 12px;
+  box-shadow: 0 0 4px gray;
 }
 
 .logoContainer, .nav {

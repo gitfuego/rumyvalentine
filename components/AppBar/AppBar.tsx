@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from "./AppBar.module.scss"
 import { Button, Box } from '@mui/joy';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import Loader from '../Loader/Loader';
 
 
@@ -53,6 +54,7 @@ export default function AppBar() {
 
   if (loading) {
     return (
+      <>
       <Box component="header" className={styles.header} >
         <Box className={styles.logoContainer}>
           <a href='/' className={styles.logo}></a>
@@ -63,20 +65,27 @@ export default function AppBar() {
           <ModeToggle />
         </Box>
       </Box>
+      <PullTab/>
+      </>
     );
   }
 
   return (
+    <>
     <Box component="header" className={styles.header} >
       <Box className={styles.logoContainer}>
           <a href='/' className={styles.logo}></a>
         </Box>
-      <h4>{session?.user?.email ? session?.user?.email.substring(0, session?.user?.email.indexOf('@')) : ''}</h4>
+      <Box component="h4">
+        <span>{session?.user?.email ? session?.user?.email.substring(0, session?.user?.email.indexOf('@')) : ''}</span>
+      </Box>
       <Box component="nav" className={styles.nav}>
         <SignInButton />
         <ModeToggle />
       </Box>
     </Box>
+    <PullTab/>
+    </>
   )
 }
 
@@ -112,4 +121,18 @@ function ModeToggle() {
     }
     />
   );
+}
+
+function PullTab() {
+  return (
+    <div className={styles.pullTabContainer}>
+    <button 
+    className={styles.pullTab} 
+    onClick={(e) => {
+      const header = document.querySelector("header");
+      header!.style.top = "0";
+      header!.style.boxShadow = "0 0 8px gray";
+    }}/>
+  </div>
+  )
 }

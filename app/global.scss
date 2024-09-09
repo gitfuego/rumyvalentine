@@ -4,6 +4,10 @@
   transition: background-color 0.3s ease-in-out;
 }
 
+:root[data-joy-color-scheme='light'] body {
+  background-color: #f9f9f9;
+}
+
 #bumper {
   width: 100%;
   height: 10vh;
@@ -11,6 +15,7 @@
 }
 
 #wrapper {
+  position: relative;
   width: 100%;
   min-height: 90vh;
   display: flex;

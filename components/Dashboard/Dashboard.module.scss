@@ -9,18 +9,31 @@
 }
 
 .moduleContainer {
-  border: 1px solid gray;
   border-radius: 10px;
   box-shadow: 0px 0px 8px grey;
-  width: fit-content !important;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   transition: ease-in-out 150ms all;
+  position: relative;
   &:hover {
     box-shadow: 0px 0px 12px grey;
     scale: 103%;
+  }
+  &.disabled {
+    &::before {
+    content: '';
+    position: absolute;
+    border-radius: inherit;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.3);
+    box-shadow: 0px 0px 12px grey inset;
+    }
   }
 }
 
