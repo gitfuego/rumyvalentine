@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import styles from "./AppBar.module.scss"
 import { Button, Box } from '@mui/joy';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import Loader from '../Loader/Loader';
 
 

@@ -23,6 +23,8 @@
     scale: 103%;
   }
   &.disabled {
+    box-shadow: none;
+    user-select: none;
     &::before {
     content: '';
     position: absolute;

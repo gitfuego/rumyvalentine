@@ -5,6 +5,7 @@ import Image from "next/image";
 import styles from "./Dashboard.module.scss"
 import AgreementPrompt from "./AgreementPrompt";
 import AdaptiveStepper from "./AdaptiveStepper";
+import { Check } from '@mui/icons-material';
 
 export default async function Dashboard() {
   const session = await getServerSession();
@@ -21,7 +22,7 @@ export default async function Dashboard() {
         orientation="vertical"
         indicator={
           <StepIndicator variant="solid" color="danger">
-            1
+            {didProfile ? <Check/> : '1'}
           </StepIndicator>
         }
         >
@@ -38,7 +39,10 @@ export default async function Dashboard() {
       </Step>
       <Step
         orientation="vertical"
-        indicator={<StepIndicator variant="outlined">2</StepIndicator>}
+        indicator={
+        <StepIndicator variant={didProfile ? "solid" : "outlined"} color={didProfile ? "danger" : "neutral"}>
+          {didQuestionnaire ? <Check /> : "2"}
+        </StepIndicator>}
         >
         <Typography sx={{textAlign: 'center'}}></Typography>
         <Stack spacing={1}>
@@ -52,7 +56,10 @@ export default async function Dashboard() {
         </Stack>
       </Step>
       <Step orientation="vertical"
-      indicator={<StepIndicator variant="outlined">3</StepIndicator>}
+      indicator={
+      <StepIndicator variant={didQuestionnaire ? "solid" : "outlined"} color={didQuestionnaire ? "danger" : "neutral"}>
+        3
+      </StepIndicator>}
       >
         <Typography sx={{textAlign: 'center'}}></Typography>
         <Stack spacing={1}>
