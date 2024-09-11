@@ -6,6 +6,7 @@ import styles from "./Dashboard.module.scss"
 import AgreementPrompt from "./AgreementPrompt";
 import AdaptiveStepper from "./AdaptiveStepper";
 import { Check } from '@mui/icons-material';
+import CustomCountdown from '../Countdown/CustomCountdown';
 
 export default async function Dashboard() {
   const session = await getServerSession();
@@ -65,11 +66,13 @@ export default async function Dashboard() {
         <Stack spacing={1}>
               <Module 
               completed={false}
-              href='/home#'
+              href='/home/matches'
               image="/images/rumvLogoOnly.svg" 
               label="Matches"
               />
-          <Typography sx={{textAlign: 'center'}}>What you will see</Typography>
+          <Typography sx={{textAlign: 'center'}}>
+            <CustomCountdown />
+          </Typography>
         </Stack>
       </Step>
     </AdaptiveStepper>
@@ -115,8 +118,8 @@ async function checkResponse(email) {
 
 function Module({ href, image, label, completed }) {
   let disabled = completed;
-  if (label === "Matches") disabled = new Date('2025-02-10T00:00:00') > new Date();
-  else if (label === "Profile") disabled = false;
+  // if (label === "Matches") disabled = new Date('2025-02-10T00:00:00') > new Date();
+  if (label === "Profile") disabled = false;
 
   return (
     <Link href={href} disabled={disabled}>

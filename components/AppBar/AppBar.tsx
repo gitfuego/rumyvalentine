@@ -76,7 +76,7 @@ export default function AppBar() {
           <a href='/' className={styles.logo}></a>
         </Box>
       <Box component="h4">
-        <span>{session?.user?.email ? session?.user?.email.substring(0, session?.user?.email.indexOf('@')) : ''}</span>
+        <span>{session?.user?.email ? session?.user?.email.split('@')[0] : ''}</span>
       </Box>
       <Box component="nav" className={styles.nav}>
         <SignInButton />
