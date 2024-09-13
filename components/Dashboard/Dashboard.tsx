@@ -12,11 +12,11 @@ export default async function Dashboard() {
   const session = await getServerSession();
   const user = await getUser(session?.user);
   const didQuestionnaire = await checkResponse(session?.user?.email);
-  const didProfile = user!.pref !== null;
+  const didProfile = user?.pref !== null;
 
   return (
     <>
-      {!user!.agreed && <AgreementPrompt />}
+      {!user?.agreed && <AgreementPrompt />}
       <main className={styles.main}>
       <AdaptiveStepper>
       <Step

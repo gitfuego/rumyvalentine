@@ -1,5 +1,7 @@
 "use client"
 import Countdown from 'react-countdown';
+import { useEffect, useState } from 'react';
+import Loader from '../Loader/Loader';
 
 export default function CustomCountdown() {
 
@@ -15,7 +17,7 @@ export default function CustomCountdown() {
 function Completionist() {
 
   return (
-    <span>You are good to go!</span>
+    <span>Matches are now available!</span>
   );
 } 
 
@@ -26,6 +28,17 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
     return <Completionist />;
   } else {
     // Render a countdown
-    return <span>{days}:{hours}:{minutes}:{seconds}</span>;
+    return <Counter days={days} hours={hours} minutes={minutes} seconds={seconds} />
   }
 };
+
+function Counter({days, hours, minutes, seconds}) {
+  const [loading, setLoading ] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [])
+
+  if (loading) return <Loader />;
+  return <span>{days}:{hours}:{minutes}:{seconds}</span>
+}
