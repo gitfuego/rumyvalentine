@@ -1,8 +1,8 @@
 "use client"
 import { Avatar, Box } from "@mui/joy";
 
-export default function CustomAvatar() {
+export default function CustomAvatar({user}) {
   return (
-    <Avatar />
+    <Avatar alt={user.name} src={user.image}></Avatar>
   );
 }

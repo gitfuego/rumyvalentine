@@ -11,8 +11,7 @@ export default async function Matches() {
   return (
     <Box>
       Matches
-      {matches.map((match, idx) => <CustomAvatar key={`match${idx}`} />)
-      }
+      {matches.map((match, idx) => <CustomAvatar user={match} key={`match${idx}`} />)}
     </Box>
   );
 }
@@ -27,6 +26,6 @@ async function getMatches(user) {
     return response;
   } catch (err) {
     console.error(err);
-    return [1, 2];
+    return [{name: "John", image: null}, {name: "Jane Doe", image: null}];
   }
 }
