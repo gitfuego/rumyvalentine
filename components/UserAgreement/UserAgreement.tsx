@@ -5,7 +5,7 @@ export default function UserAgreement() {
   return (
     <Box className={styles.container}>
       <Box component="h1" className={styles.title}>User Agreement</Box>
-      <Box component="p" className={styles.effectiveDate}>Effective Date: August 20th, 2024</Box>
+      <Box component="p" className={styles.effectiveDate}>Effective Date: December 20th, 2024</Box>
       
       <Box component="section" className={styles.section}>
         <Box component="h2">Welcome to RUmyValentine ("RUMV")!</Box>
