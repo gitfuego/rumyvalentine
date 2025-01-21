@@ -1,7 +1,6 @@
-import CustomCountdown from "../components/Countdown/CustomCountdown";
+import LandingCountdown from "../components/Countdown/LandingCountdown";
 import StudentCount from "../components/StudentCount/StudentCount";
 import { Box } from "@mui/joy";
-// import { neon } from "@neondatabase/serverless";
 
 export default async function Page() {
 
@@ -10,7 +9,7 @@ export default async function Page() {
       <h1>Find your Rutgers Valentine!</h1>
       <Box id='stats'>
         <StudentCount />
-        <CustomCountdown />
+        <LandingCountdown />
       </Box>
     </>
   );
