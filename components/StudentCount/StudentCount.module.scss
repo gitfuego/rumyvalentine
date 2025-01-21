@@ -1,0 +1,14 @@
+@import '../../app/variables.scss';
+
+.container {
+  border-radius: 20px;
+  background-color: $ruScarlet;
+  color: white;
+  font-weight: 700;
+  font-size: larger;
+  padding: 2%;
+  min-width: 50px;
+  text-align: center;
+  box-shadow: 0 0 8px gray;
+  
+}

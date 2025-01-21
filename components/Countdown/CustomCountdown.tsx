@@ -2,14 +2,20 @@
 import Countdown from 'react-countdown';
 import { useEffect, useState } from 'react';
 import Loader from '../Loader/Loader';
+import styles from "./CustomCountdown.module.scss";
+import { Box } from '@mui/joy';
 
 export default function CustomCountdown() {
 
   return (
-    <Countdown
-      date={new Date('2025-02-10T00:00:00')}
-      renderer={renderer}
-    />
+    <Box className={styles.container}>
+      <h4>Countdown to matches: </h4>
+      <br/>
+      <Countdown
+        date={new Date('2025-02-10T00:00:00')}
+        renderer={renderer}
+        />
+    </Box>
   )
 }
 
@@ -40,5 +46,10 @@ function Counter({days, hours, minutes, seconds}) {
   }, [])
 
   if (loading) return <Loader />;
-  return <span>{days}:{hours}:{minutes}:{seconds}</span>
+  return (
+    <div className={styles.subContainer}>
+      <span>{days}:{hours}:{minutes}:{seconds}</span>
+      <div className={styles.heart}/>
+    </div>
+  );
 }

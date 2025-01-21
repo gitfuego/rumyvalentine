@@ -44,3 +44,11 @@ footer {
     font-size: small !important;
   }
 }
+
+#stats {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}

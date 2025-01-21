@@ -1,10 +1,11 @@
 import { Box } from "@mui/joy"
 import { neon } from "@neondatabase/serverless";
+import styles from "./StudentCount.module.scss";
 
 export default async function StudentCount() {
   const numStudents = await getNumStudents();
   return (
-    <Box>{numStudents} Scarlet Knights have already joined!</Box>
+    <Box className={styles.container}>{numStudents} Scarlet Knights have already joined!</Box>
   )
 }
 
