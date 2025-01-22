@@ -10,9 +10,8 @@ export default function LandingCountdown() {
   return (
     <Box className={styles.container}>
       <h4>Countdown to matches: </h4>
-      <br/>
       <Countdown
-        date={new Date('2025-02-10T00:00:00')}
+        date={new Date('2025-02-12T09:00:00')}
         renderer={renderer}
         />
     </Box>

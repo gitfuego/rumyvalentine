@@ -118,7 +118,7 @@ async function checkResponse(email) {
 
 function Module({ href, image, label, completed }) {
   let disabled = completed;
-  if (label === "Matches") disabled = new Date('2025-02-10T00:00:00') > new Date();
+  if (label === "Matches") disabled = new Date('2025-02-12T09:00:00') > new Date();
   if (label === "Profile") disabled = false;
 
   return (

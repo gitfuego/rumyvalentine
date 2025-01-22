@@ -29,5 +29,5 @@ export async function middleware(req) {
 
 // don't match for public routes
 export const config = {
-  matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico|images|user-agreement).*)'],
+  matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico|images|fonts|user-agreement).*)'],
 };

@@ -15,14 +15,16 @@
 
 .subContainer {
   width: 70%;
+  padding: 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-weight: medium;
 }
 
 .heart {
-  height: 24px;
-  width: 24px;
+  height: 12px;
+  width: 12px;
   background-color: $ruScarlet;
   transform: rotate(-45deg);
   position: relative;
@@ -34,20 +36,20 @@
 .heart::before, 
 .heart::after {
   content: "";
-  height: 24px;
-  width: 24px;
+  height: 12px;
+  width: 12px;
   background-color: $ruScarlet;
   border-radius: 50%;
   position: absolute;
 }
 
 .heart::before {
-  top: -12px;
+  top: -6px;
   left: 0px;
 }
 
 .heart::after {
-  left: 12px;
+  left: 6px;
   top: 0px;
 }
 
