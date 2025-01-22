@@ -6,7 +6,7 @@ export default async function Page() {
 
   return (
     <>
-      <h1>Find your Rutgers Valentine!</h1>
+      <h1>RU my Valentine?</h1>
       <Box id='stats'>
         <StudentCount />
         <LandingCountdown />
