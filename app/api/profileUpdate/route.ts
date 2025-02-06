@@ -14,7 +14,7 @@ const s3Client = new S3Client({
 
 // Function to upload a new file to S3
 async function uploadFileToS3(fileBuffer: Buffer, fileName: string) {
-  const key = `profile_pics/${fileName}-${Date.now()}`;
+  const key = `profile_pics/${Date.now()}-${fileName}`;
   const params = {
     Bucket: process.env.S3_BUCKET_NAME!,
     Key: key,
