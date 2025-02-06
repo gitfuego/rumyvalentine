@@ -38,13 +38,13 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
 };
 
 function Counter({days, hours, minutes, seconds}) {
-  const [loading, setLoading ] = useState(true);
+  // const [loading, setLoading ] = useState(true);
 
-  useEffect(() => {
-    setLoading(false);
-  }, [])
+  // useEffect(() => {
+  //   setLoading(false);
+  // }, [])
 
-  if (loading) return <Loader />;
+  // if (loading) return <Loader />;
   return (
     <div className={styles.subContainer}>
       <span>{days}:{hours}:{minutes}:{seconds}</span>
