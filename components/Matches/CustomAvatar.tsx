@@ -23,12 +23,12 @@ export default function CustomAvatar({user}) {
   }
   return (
     <Box className={styles.matchContainer}>
-      <Avatar alt={user.name}></Avatar>
+      <Avatar alt={user.name} src={user.profile_pic}></Avatar>
       <Box className={styles.details}>
         <Box>Name: {user.name}</Box>
         <Box>Sex: {user.sex == 'm' ? "Male" : "Female"}</Box>
         <Box>Preference: {user.pref == 'm' ? "Males" : user.pref == 'f' ? "Females" : "Any"}</Box>
-        <Box>{ctype}:</Box>
+        <Box>{ctype}: {user.contact}</Box>
       </Box>
     </Box>
   );

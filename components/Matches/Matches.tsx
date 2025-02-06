@@ -6,7 +6,6 @@ import CustomAvatar from './CustomAvatar';
 export default async function Matches() {
   const session = await getServerSession();
   const matches = await getMatches(session?.user);
-  // lets add some css animations
   
   return (
     <Box>
@@ -35,8 +34,6 @@ async function getMatches(user) {
       WHERE (m.user1 = $1 OR m.user2 = $1);`,
       [user.email]
     );
-    return [{name: "John", sex: 'm', pref: 'f', ctype:'i', contact:'johnd1'}, 
-      {name: "Jane Doe", sex: 'f', pref: 'a', ctype:'p', contact:'janed1'}];
     return response;
   } catch (err) {
     console.error(err);

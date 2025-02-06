@@ -1,4 +1,5 @@
 import { neon } from '@neondatabase/serverless';
+import { profile } from 'console';
 import { NextResponse, type NextRequest } from 'next/server';
 
 const sql = neon(process.env.DATABASE_URL!);
@@ -29,10 +30,10 @@ const sql = neon(process.env.DATABASE_URL!);
 
 export async function POST(request: NextRequest) {
   const data = await request.json();
-  const {name, sex, pref, contact, ctype} = data.responses;
-  const values = [name, sex, pref, contact, ctype];
+  const {name, sex, pref, contact, ctype, profile_pic} = data.responses;
+  const values = [name, sex, pref, contact, ctype, profile_pic];
   values.push(data.email);
-  const updateQuery = `UPDATE users SET name = $1, sex = $2, pref = $3, contact = $4, ctype = $5
+  const updateQuery = `UPDATE users SET name = $1, sex = $2, pref = $3, contact = $4, ctype = $5, profile_pic = $6
   WHERE email = $6;`;
   try {
     await sql(updateQuery, values);
