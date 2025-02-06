@@ -17,7 +17,7 @@ const questions = [
   { question: "I believe in radical honesty. I communicate openly in all my relationships, romantic or not." },
   { question: "No matter what’s happening, school comes first. Prioritizing my studies is important to me." },
   { question: "If I have the option, I’d rather study at the library than anywhere else." },
-  { question: "If attendance isn’t mandatory, I’m probably not showing up. No cap." },
+  { question: "If attendance isn’t mandatory, I’m probably not showing up." },
   { question: "I actually plan my study schedule instead of last-minute cramming. Crazy, right?" },
   { question: "My ideal partner has goals. A clear vision for their future, not just vibes." },
   { question: "Walking around Passion Puddle with someone special sounds like a great time." },
