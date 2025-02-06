@@ -27,8 +27,7 @@ function MatchesPlaceholder() {
 async function getMatches(user) {
   const sql = neon(process.env.DATABASE_URL!);
   try {
-    // check if user is in database
-    const response = await sql(`SELECT DISTINCT u.name, u.sex, u.pref, u.ctype, u.contact
+    const response = await sql(`SELECT DISTINCT u.name, u.sex, u.pref, u.ctype, u.contact, u.profile_pic
       FROM Users u
       JOIN Matches m ON (m.user1 = u.email OR m.user2 = u.email)
       WHERE (m.user1 = $1 OR m.user2 = $1);`,
