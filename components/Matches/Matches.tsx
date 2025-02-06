@@ -1,6 +1,6 @@
 import { neon } from '@neondatabase/serverless';
 import { getServerSession } from "next-auth";
-import { Box } from '@mui/joy';
+import { Box, List } from '@mui/joy';
 import CustomAvatar from './CustomAvatar';
 
 export default async function Matches() {
@@ -10,10 +10,19 @@ export default async function Matches() {
   
   return (
     <Box>
-      Matches
-      {matches.map((match, idx) => <CustomAvatar user={match} key={`match${idx}`} />)}
+      <Box component="h1">Matches</Box>
+      <List>
+      {matches.length>0 ? matches.map((match, idx) => <CustomAvatar user={match} key={`match${idx}`} />) :
+      <MatchesPlaceholder/>}
+      </List>
     </Box>
   );
+}
+
+function MatchesPlaceholder() {
+  return (
+    <Box component="h2" textAlign="center">No matches yet! Algorithm working...</Box>
+  )
 }
 
 async function getMatches(user) {
@@ -26,6 +35,7 @@ async function getMatches(user) {
     return response;
   } catch (err) {
     console.error(err);
-    return [{name: "John", image: null}, {name: "Jane Doe", image: null}];
+    return [{name: "John"}, {name: "Jane Doe"}];
+    return [];
   }
 }
