@@ -18,8 +18,7 @@ async function uploadFileToS3(fileBuffer: Buffer, fileName: string) {
     Bucket: process.env.S3_BUCKET_NAME!,
     Key: key,
     Body: fileBuffer,
-    ContentType: "image/*".replace,
-    ACL: "public-read", // Ensure files are accessible if needed
+    ContentType: "image/*",
   };
 
   const command = new PutObjectCommand(params);
