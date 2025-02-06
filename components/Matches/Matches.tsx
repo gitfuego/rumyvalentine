@@ -29,13 +29,17 @@ async function getMatches(user) {
   const sql = neon(process.env.DATABASE_URL!);
   try {
     // check if user is in database
-    const response = await sql(`SELECT * FROM Matches WHERE email1=$1 OR email2=$1`,
+    const response = await sql(`SELECT DISTINCT u.name, u.sex, u.pref, u.ctype, u.contact
+      FROM Users u
+      JOIN Matches m ON (m.user1 = u.email OR m.user2 = u.email)
+      WHERE (m.user1 = $1 OR m.user2 = $1);`,
       [user.email]
     );
+    return [{name: "John", sex: 'm', pref: 'f', ctype:'i', contact:'johnd1'}, 
+      {name: "Jane Doe", sex: 'f', pref: 'a', ctype:'p', contact:'janed1'}];
     return response;
   } catch (err) {
     console.error(err);
-    return [{name: "John"}, {name: "Jane Doe"}];
     return [];
   }
 }

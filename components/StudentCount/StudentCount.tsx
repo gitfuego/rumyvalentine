@@ -12,7 +12,7 @@ export default async function StudentCount() {
 async function getNumStudents() {
   const sql = neon(process.env.DATABASE_URL!);
   try {
-    const response = await sql`SELECT COUNT(*) AS num_users FROM Users`;
+    const response = await sql`SELECT COUNT(*) AS num_users FROM Users;`;
     return response[0].num_users;
   } catch (err) {
     console.error(err);
