@@ -16,7 +16,6 @@ export default async function Page() {
         <LandingCountdown />
       </Box>
       <br/>
-      <Box component="section" id="steps">
         <Box component="h2" >How to find your match:</Box>
         <List component="ol" marker="decimal" >
           <ListItem>
@@ -38,7 +37,6 @@ export default async function Page() {
             </ListItemContent>
           </ListItem>
         </List>
-      </Box>
       <br/>
       <Box width="50%" minWidth="300px">
         <Box component="h2" textAlign="center">What is RUMV?</Box>
