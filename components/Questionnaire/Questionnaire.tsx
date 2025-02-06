@@ -63,6 +63,7 @@ export default function Questionnaire({ user }) {
           <br />
         </ModalDialog>
       </Modal>
+      <h2 style={{margin: '2% 5% 0', textAlign: 'center'}}>Rate from 1-5 how much you agree with each of the following, with 1 being the lowest and 5 being the highest.</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         {questions.map((q, index) => (
           <Question key={index} data={q} setFormData={setFormData} i={index} formData={formData} />
