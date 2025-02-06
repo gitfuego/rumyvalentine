@@ -1,6 +1,5 @@
 import { neon } from '@neondatabase/serverless';
 import { NextResponse, type NextRequest } from 'next/server';
-
 const sql = neon(process.env.DATABASE_URL!);
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
@@ -14,12 +13,13 @@ const s3Client = new S3Client({
 
 // Function to upload a new file to S3
 async function uploadFileToS3(fileBuffer: Buffer, fileName: string) {
-  const key = `profile_pics/${Date.now()}-${fileName}`;
+  const key = `${Date.now()}-${fileName}`;
   const params = {
     Bucket: process.env.S3_BUCKET_NAME!,
     Key: key,
     Body: fileBuffer,
-    ContentType: "image/*"
+    ContentType: "image/*".replace,
+    ACL: "public-read", // Ensure files are accessible if needed
   };
 
   const command = new PutObjectCommand(params);
