@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic"; // Forces dynamic behavior (prevents static caching)
 
 import { neon } from '@neondatabase/serverless';
 import { getServerSession } from "next-auth";

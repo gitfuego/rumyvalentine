@@ -5,6 +5,8 @@ import AuthProvider from '../components/AuthProvider/AuthProvider'
 import './global.scss'
 import '@fontsource/inter'
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({ children }: {children: React.ReactNode}) {
   return (
     <html lang="en">
