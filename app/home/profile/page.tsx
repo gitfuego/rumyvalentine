@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // Forces dynamic behavior (prevents static caching)
+
 import Profile from "../../../components/Profile/Profile";
 import { neon } from '@neondatabase/serverless';
 import { getServerSession } from "next-auth";
