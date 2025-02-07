@@ -1,6 +1,7 @@
 import { Box } from "@mui/joy";
 import { neon } from "@neondatabase/serverless";
 import styles from "./StudentCount.module.scss";
+import { headers } from "next/headers";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,7 @@ export default async function StudentCount() {
 }
 
 async function getNumStudents() {
+  headers();
   const sql = neon(process.env.DATABASE_URL!);
   try {
     const response = await sql`SELECT COUNT(*) AS num_users FROM Users;`;
