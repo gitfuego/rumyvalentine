@@ -1,4 +1,6 @@
-import { Box } from "@mui/joy"
+export const dynamic = "force-dynamic"; // Forces dynamic behavior (prevents static caching)
+
+import { Box } from "@mui/joy";
 import { neon } from "@neondatabase/serverless";
 import styles from "./StudentCount.module.scss";
 
@@ -6,7 +8,7 @@ export default async function StudentCount() {
   const numStudents = await getNumStudents();
   return (
     <Box className={styles.container}>{numStudents} Scarlet Lovers have already joined!</Box>
-  )
+  );
 }
 
 async function getNumStudents() {
