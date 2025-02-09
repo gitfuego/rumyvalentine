@@ -6,6 +6,10 @@
   transition: background-color 0.3s ease-in-out;
 }
 
+html {
+  overscroll-behavior: none;
+}
+
 :root[data-joy-color-scheme='light'] body {
   background-color: #f9f9f9;
 }
@@ -62,6 +66,7 @@ h1 {
   align-items: center;
   position: relative;
 }
+
 
 footer {
   width: 100%;
