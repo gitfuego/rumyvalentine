@@ -1,22 +1,25 @@
-"use client"
+"use client";
 import { FormControl, Radio, RadioGroup, Button, FormLabel, Input, Select, Option, Box, FormHelperText } from '@mui/joy';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import styles from "./Profile.module.scss";
 import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 export default function Profile({ user }) {
-  const { register, handleSubmit } = useForm({ defaultValues: {
-    name: user.name,
-    sex: user.sex,
-    pref: user.pref,
-    contact: user.contact,
-  }});
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      name: user.name,
+      sex: user.sex,
+      pref: user.pref,
+      contact: user.contact,
+    }
+  });
 
   const [contactType, setContactType] = useState(user.ctype);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [preview, setPreview] = useState(user.profile_pic || '/images/profileIcon.svg'); // Store preview URL
+  const [preview, setPreview] = useState(user.profile_pic || '/images/profileIcon.svg'); 
   const router = useRouter();
 
   function onSubmit(data) {
@@ -49,7 +52,29 @@ export default function Profile({ user }) {
     const file = e.target.files[0];
     if (file) {
       setSelectedFile(file);
-      setPreview(URL.createObjectURL(file)); // Update preview with the new file
+      setPreview(URL.createObjectURL(file)); 
+    }
+  }
+
+  async function handleDelete() {
+    const confirmDelete = window.confirm("Are you sure you want to delete your profile? This action cannot be undone.");
+    
+    if (confirmDelete) {
+      try {
+        const response = await fetch('/api/deleteUser', { method: "DELETE" });
+        const data = await response.json();
+        
+        if (data.successful) {
+          alert("Profile deleted successfully.");
+          signOut();
+          router.push('/');
+        } else {
+          alert("Error deleting profile: " + data.error);
+        }
+      } catch (error) {
+        console.error("Error deleting profile:", error);
+        alert("An error occurred while deleting your profile.");
+      }
     }
   }
 
@@ -102,7 +127,7 @@ export default function Profile({ user }) {
           />
         </FormControl>
       </Box>
-      <Box style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <FormControl>
           <FormLabel>Profile Picture</FormLabel>
           <img 
@@ -113,10 +138,12 @@ export default function Profile({ user }) {
           <input type="file" accept="image/*" onChange={handleFileChange} />
         </FormControl>
       </Box>
-      <Box component="span">
+      <Box component="span" sx={{ display: 'flex', gap: 2 }}>
         <Button type="submit" loading={buttonLoading}>Save</Button>
         <Button type="button" color='neutral' onClick={() => router.back()}>Cancel</Button>
       </Box>
+      <br />
+      <Button type="button" color="danger" onClick={handleDelete}>Delete Profile</Button>
     </form>
   );
 }
