@@ -31,7 +31,8 @@ async function getMatches(user) {
     const response = await sql(`SELECT DISTINCT u.name, u.sex, u.pref, u.ctype, u.contact, u.profile_pic
       FROM Users u
       JOIN Matches m ON (m.user1 = u.email OR m.user2 = u.email)
-      WHERE (m.user1 = $1 OR m.user2 = $1);`,
+      WHERE (m.user1 = $1 OR m.user2 = $1)
+      AND u.email <> $1;`,
       [user.email]
     );
     return response;
