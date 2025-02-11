@@ -7,7 +7,7 @@ export default function CustomCountdown() {
 
   return (
     <Countdown
-      date={new Date('2025-02-12T12:00:00')}
+      date={new Date('2025-02-12T17:00:00Z')}
       renderer={renderer}
     />
   )
