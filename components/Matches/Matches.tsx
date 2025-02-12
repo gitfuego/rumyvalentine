@@ -21,7 +21,7 @@ export default async function Matches() {
 
 function MatchesPlaceholder() {
   return (
-    <Box component="h2" textAlign="center">No matches yet! Algorithm working...</Box>
+    <Box component="h2" textAlign="center">No matches yet! Either the algorithm is working on it or you didn't fill everything out in time.</Box>
   )
 }
 
